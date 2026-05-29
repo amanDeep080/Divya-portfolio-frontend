@@ -2291,18 +2291,15 @@ window.addEventListener('scroll', () => {
 /* ── FORM ── */
 const API_URL = 'https://divya-contact-api.onrender.com/contact';
 
-/* ── FORM ── */
 async function submitForm(e) {
   e.preventDefault();
 
-  const form = e.target;
-
-const data = {
-  name: form.querySelector('input[type="text"]').value,
-  email: form.querySelector('input[type="email"]').value,
-  subject: form.querySelectorAll('input[type="text"]')[1].value,
-  message: form.querySelector('textarea').value
-};
+  const data = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    subject: document.getElementById('subject').value,
+    message: document.getElementById('message').value
+  };
 
   const msg = document.getElementById('form-msg');
 
@@ -2315,10 +2312,12 @@ const data = {
       body: JSON.stringify(data)
     });
 
-    if (response.ok) {
-      msg.innerHTML = "✓ MESSAGE SENT — I'll be in touch very shortly!";
+    const result = await response.json();
+
+    if (response.ok && result.ok !== false) {
+      msg.innerHTML = "✓ MESSAGE SENT — I'll reply soon!";
       msg.style.display = 'block';
-      form.reset();
+      e.target.reset();
     } else {
       msg.innerHTML = "✗ Failed to send message.";
       msg.style.display = 'block';
@@ -2334,7 +2333,6 @@ const data = {
     msg.style.display = 'none';
   }, 5000);
 }
-
 
 /* ══════════════════════════════
    MEDIA REEL ENGINE
