@@ -2017,30 +2017,36 @@ footer {
 
     <div class="reveal-right">
       <form class="c-form" onsubmit="submitForm(event)">
-        <div class="f-row">
-          <div class="f-group">
-            <label class="f-label">Your Name</label>
-            <input type="text" class="f-input" placeholder="e.g. Rahul Verma" required>
-          </div>
-          <div class="f-group">
-            <label class="f-label">Email Address</label>
-            <input type="email" class="f-input" placeholder="your@email.com" required>
-          </div>
-        </div>
-        <div class="f-group">
-          <label class="f-label">Organisation / Subject</label>
-          <input type="text" class="f-input" placeholder="News Channel / Collaboration / Opportunity">
-        </div>
-        <div class="f-group">
-          <label class="f-label">Message</label>
-          <textarea class="f-textarea" placeholder="Tell me about the opportunity or project…" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-red f-submit">
-          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          Send Message
-        </button>
-        <p id="form-msg">✓ MESSAGE SENT — I'll be in touch very shortly!</p>
-      </form>
+
+  <div class="f-row">
+    <div class="f-group">
+      <label class="f-label">Your Name</label>
+      <input type="text" id="name" class="f-input" placeholder="e.g. Rahul Verma" required>
+    </div>
+
+    <div class="f-group">
+      <label class="f-label">Email Address</label>
+      <input type="email" id="email" class="f-input" placeholder="your@email.com" required>
+    </div>
+  </div>
+
+  <div class="f-group">
+    <label class="f-label">Organisation / Subject</label>
+    <input type="text" id="subject" class="f-input" placeholder="News Channel / Collaboration / Opportunity">
+  </div>
+
+  <div class="f-group">
+    <label class="f-label">Message</label>
+    <textarea id="message" class="f-textarea" placeholder="Tell me about the opportunity or project…" required></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-red f-submit">
+    Send Message
+  </button>
+
+  <p id="form-msg" style="display:none;"></p>
+
+</form>
     </div>
   </div>
 </section>
