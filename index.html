@@ -2288,62 +2288,13 @@ window.addEventListener('scroll', () => {
   goTop.classList.toggle('show', window.scrollY > 500);
 });
 
-/* ── CONTACT FORM ── */
-// 🔧 After deploying to Render, replace this URL with your actual Render URL
-// Example: 'https://divya-contact-api.onrender.com/contact'
-const API_URL = 'https://YOUR-RENDER-APP.onrender.com/contact';
-
-async function submitForm(e) {
+/* ── FORM ── */
+function submitForm(e) {
   e.preventDefault();
-  const form    = e.target;
-  const btn     = form.querySelector('button[type="submit"]');
-  const msgEl   = document.getElementById('form-msg');
-
-  const inputs = form.querySelectorAll('input, textarea');
-  const [nameEl, emailEl, subjectEl, messageEl] = inputs;
-
-  const payload = {
-    name   : nameEl.value.trim(),
-    email  : emailEl.value.trim(),
-    subject: subjectEl.value.trim(),
-    message: messageEl.value.trim(),
-  };
-
-  // Button loading state
-  const origHTML = btn.innerHTML;
-  btn.innerHTML  = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-opacity="0.3"/><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="0.8s" repeatCount="indefinite"/></path></svg> Sending…';
-  btn.disabled   = true;
-  btn.style.opacity = '0.7';
-  msgEl.style.display = 'none';
-  msgEl.style.color   = 'var(--red)';
-
-  try {
-    const res  = await fetch(API_URL, {
-      method : 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body   : JSON.stringify(payload),
-    });
-    const data = await res.json();
-
-    if (data.ok) {
-      msgEl.textContent   = '✓ MESSAGE SENT — Check your inbox! I'll reply within 24 hrs.';
-      msgEl.style.color   = '#00A878';
-      msgEl.style.display = 'block';
-      form.reset();
-    } else {
-      const errText = data.errors ? data.errors.join(' · ') : (data.error || 'Something went wrong.');
-      msgEl.textContent   = '✗ ' + errText;
-      msgEl.style.display = 'block';
-    }
-  } catch (err) {
-    msgEl.textContent   = '✗ Network error — please email directly at divyasingh08262@gmail.com';
-    msgEl.style.display = 'block';
-  } finally {
-    btn.innerHTML = origHTML;
-    btn.disabled  = false;
-    btn.style.opacity = '1';
-    setTimeout(() => { msgEl.style.display = 'none'; }, 7000);
-  }
+  const msg = document.getElementById('form-msg');
+  msg.style.display = 'block';
+  e.target.reset();
+  setTimeout(() => { msg.style.display = 'none'; }, 5000);
 }
 
 
