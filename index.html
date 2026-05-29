@@ -2297,9 +2297,10 @@ async function submitForm(e) {
 
   const form = e.target;
 
- const data = {
+const data = {
   name: form.querySelector('input[type="text"]').value,
   email: form.querySelector('input[type="email"]').value,
+  subject: form.querySelectorAll('input[type="text"]')[1].value,
   message: form.querySelector('textarea').value
 };
 
