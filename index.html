@@ -120,9 +120,14 @@ body {
 
 /* Hide custom cursor on touch devices for better efficiency */
 @media (hover: none) and (pointer: coarse) {
-  #cursor, #cursor-ring { display: none !important; }
+  #cursor, #cursor-ring { display: none !important; pointer-events: none !important; }
   body { cursor: auto !important; }
-  a, button, .vcard, .exp-card, .srv-card { cursor: pointer !important; }
+  a, button, .vcard, .exp-card, .srv-card, .modal-close, .modal-nav, .soc-link { cursor: pointer !important; }
+
+  /* Disable hover translations that cause jitter on touch */
+  .vcard:hover, .exp-card:hover, .srv-card:hover, .pillar-card:hover, .edu-card:hover {
+    transform: none !important;
+  }
 }
 
 body:has(a:hover) #cursor,
@@ -208,7 +213,7 @@ body:has(button:hover) #cursor { width: 16px; height: 16px; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
 .mobile-menu {
-  display: none; position: fixed;
+  display: block; position: fixed;
   top: 60px; left: 0; right: 0;
   background: rgba(10,10,10,0.98);
   backdrop-filter: blur(24px);
@@ -216,10 +221,14 @@ body:has(button:hover) #cursor { width: 16px; height: 16px; }
   border-bottom: 1px solid var(--glass-border);
   z-index: 199;
   transform: translateY(-20px); opacity: 0;
-  transition: transform .3s var(--ease-out), opacity .3s;
+  transition: transform .3s var(--ease-out), opacity .3s, visibility .3s;
+  pointer-events: none;
+  visibility: hidden;
 }
 .mobile-menu.open {
   transform: translateY(0); opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
 }
 .mobile-menu a {
   display: block;
@@ -1067,7 +1076,6 @@ footer {
   .srv-grid { grid-template-columns: 1fr 1fr; }
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
-  .mobile-menu { display: block; }
   .f-row { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
@@ -1431,6 +1439,8 @@ footer {
   border-color: var(--red); background: var(--red-subtle);
   box-shadow: 0 0 20px var(--red-glow);
 }
+
+.reel-search-wrap {
   position: relative; margin-bottom: 1.5rem;
   max-width: 380px;
 }
@@ -2102,6 +2112,7 @@ document.addEventListener('mousemove', e => {
 });
 
 (function animRing() {
+  if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
   rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
   ring.style.left = rx+'px'; ring.style.top = ry+'px';
   requestAnimationFrame(animRing);
