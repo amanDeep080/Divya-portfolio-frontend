@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="logo/divya-singh-logo-favicon.png">
 <title>Divya Singh — Broadcast Journalist & News Anchor</title>
 <meta name="description" content="Portfolio of Divya Singh — Broadcast Journalist, News Anchor, Field Reporter & Digital Storyteller">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,13 +68,17 @@ body {
 }
 
 .loader-logo {
-  font-family: var(--font-display);
-  font-size: 4.5rem; letter-spacing: 0.15em;
-  color: var(--white);
   overflow: hidden;
+  filter: drop-shadow(0 0 0px var(--red));
+  animation: loader-logo-pulse 2s infinite ease-in-out;
 }
-
-.loader-logo span { color: var(--red); }
+@keyframes loader-logo-pulse {
+  0%, 100% { filter: drop-shadow(0 0 10px rgba(255,45,45,0.4)); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 30px rgba(255,45,45,0.8)); transform: scale(1.05); }
+}
+.loader-logo img {
+  height: 120px; width: auto;
+}
 
 .loader-bar-wrap {
   width: 220px; height: 2px;
@@ -110,12 +115,10 @@ body {
 }
 #cursor {
   width: 8px; height: 8px; background: var(--red); border-radius: 50%;
-  mix-blend-mode: screen;
+  box-shadow: none !important;
 }
 #cursor-ring {
-  width: 32px; height: 32px;
-  border: 1px solid rgba(255,45,45,0.45);
-  border-radius: 50%; z-index: 9997;
+  display: none !important;
 }
 
 /* Hide custom cursor on touch devices for better efficiency */
@@ -125,7 +128,7 @@ body {
   a, button, .vcard, .exp-card, .srv-card, .modal-close, .modal-nav, .soc-link { cursor: pointer !important; }
 
   /* Disable hover translations that cause jitter on touch */
-  .vcard:hover, .exp-card:hover, .srv-card:hover, .pillar-card:hover, .edu-card:hover {
+  .vcard:hover, .exp-card:hover, .srv-card:hover, .pillar-card:hover, .edu-card:hover, .btn:hover {
     transform: none !important;
   }
 }
@@ -153,12 +156,23 @@ body:has(button:hover) #cursor { width: 16px; height: 16px; }
 }
 
 .nav-logo {
-  font-family: var(--font-display);
-  font-size: 1.5rem; letter-spacing: 0.1em; color: var(--white);
   text-decoration: none;
-  display: flex; align-items: center; gap: 4px;
+  display: flex; align-items: center;
+  filter: drop-shadow(0 0 8px rgba(255,45,45,0.6));
+  transition: filter .3s, transform .3s;
+  animation: logo-glow-pulse 3s infinite ease-in-out;
 }
-.nav-logo .dot { color: var(--red); }
+@keyframes logo-glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(255,45,45,0.4)); }
+  50% { filter: drop-shadow(0 0 15px rgba(255,45,45,0.8)); }
+}
+.nav-logo:hover {
+  filter: drop-shadow(0 0 20px var(--red));
+  transform: scale(1.05);
+}
+.nav-logo img {
+  height: 42px; width: auto;
+}
 
 .nav-links {
   display: flex; gap: 2.2rem; list-style: none;
@@ -308,7 +322,7 @@ body:has(button:hover) #cursor { width: 16px; height: 16px; }
 
 .hero-vignette {
   position: absolute; inset: 0; z-index: 1;
-  background: radial-gradient(ellipse 80% 80% at 55% 50%, transparent 35%, rgba(0,0,0,0.75) 100%);
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, transparent 40%, rgba(0,0,0,0.8) 100%);
   pointer-events: none;
 }
 
@@ -379,7 +393,6 @@ body:has(button:hover) #cursor { width: 16px; height: 16px; }
   text-transform: uppercase; text-decoration: none;
   padding: 13px 28px; border: none; cursor: none;
   transition: transform .25s var(--ease-bounce), box-shadow .25s, background .2s;
-  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
   position: relative; overflow: hidden;
 }
 .btn::before {
@@ -400,7 +413,8 @@ body:has(button:hover) #cursor { width: 16px; height: 16px; }
   background: transparent; color: var(--white);
   border: 1px solid rgba(255,255,255,0.18);
 }
-.btn-ghost:hover { border-color: var(--red); box-shadow: 0 0 24px var(--red-glow); }
+.btn-red:hover { box-shadow: 0 0 30px var(--red-glow), 0 16px 40px rgba(0,0,0,0.4); }
+.btn-ghost:hover { border-color: var(--red); box-shadow: 0 0 30px var(--red-glow); }
 
 .btn svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; }
 
@@ -439,17 +453,48 @@ body:has(button:hover) #cursor { width: 16px; height: 16px; }
   to { opacity: 1; transform: none; }
 }
 
+@keyframes profile-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
 .profile-outer {
   position: relative;
   width: min(360px, 36vw);
+  filter: drop-shadow(0 0 15px var(--red-glow));
+  animation: profile-glow-pulse 4s infinite ease-in-out, profile-float 6s infinite ease-in-out;
 }
 
+@keyframes profile-glow-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px rgba(255,45,45,0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 45px rgba(255,45,45,0.6));
+  }
+}
+
+.profile-outer:hover {
+  animation: profile-glow-pulse 1.5s infinite ease-in-out;
+}
+
+.profile-outer:hover .profile-tl,
+.profile-outer:hover .profile-br {
+  box-shadow: 0 0 20px var(--red);
+  z-index: 5;
+}
 .profile-frame {
   aspect-ratio: 3/4;
   position: relative;
   clip-path: polygon(24px 0,100% 0,100% calc(100% - 24px),calc(100% - 24px) 100%,0 100%,0 24px);
   background: var(--charcoal);
   overflow: hidden;
+  transition: transform .4s var(--ease-out), box-shadow .4s, filter .4s;
+  border: 1px solid rgba(255,45,45,0.2);
+}
+.profile-outer:hover .profile-frame {
+  transform: scale(1.02);
+  border-color: var(--red);
 }
 
 .profile-fill {
@@ -492,6 +537,8 @@ body:has(button:hover) #cursor { width: 16px; height: 16px; }
 /* Decorative frame lines */
 .profile-tl, .profile-br {
   position: absolute; width: 28px; height: 28px;
+  box-shadow: 0 0 10px var(--red-glow);
+  transition: box-shadow .4s, border-color .4s;
 }
 .profile-tl { top: -8px; left: -8px; border-top: 2px solid var(--red); border-left: 2px solid var(--red); }
 .profile-br { bottom: -8px; right: -8px; border-bottom: 2px solid var(--red); border-right: 2px solid var(--red); }
@@ -614,7 +661,7 @@ section { padding: 96px 5vw; position: relative; }
 .pillar-card:hover {
   border-left-color: var(--red);
   transform: translateX(6px);
-  box-shadow: -4px 0 24px var(--red-glow);
+  box-shadow: 0 0 30px var(--red-glow), -4px 0 24px var(--red-glow);
 }
 .pillar-label {
   font-family: var(--font-mono); font-size: 0.6rem;
@@ -685,7 +732,7 @@ section { padding: 96px 5vw; position: relative; }
 .edu-card:hover {
   border-top-color: var(--red);
   transform: translateX(6px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+  box-shadow: 0 0 30px var(--red-glow), 0 12px 32px rgba(0,0,0,0.4);
 }
 .edu-year {
   font-family: var(--font-mono); font-size: 0.63rem;
@@ -739,7 +786,7 @@ section { padding: 96px 5vw; position: relative; }
 .exp-card:hover::after  { opacity: 1; }
 .exp-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 22px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,45,45,0.12);
+  box-shadow: 0 0 30px var(--red-glow), 0 22px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,45,45,0.12);
 }
 
 .exp-network {
@@ -829,7 +876,7 @@ section { padding: 96px 5vw; position: relative; }
   transform: translateY(-8px);
   border-color: rgba(255,45,45,0.25);
   background: rgba(255,45,45,0.04);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 40px var(--red-glow);
+  box-shadow: 0 0 45px var(--red-glow), 0 24px 60px rgba(0,0,0,0.5);
 }
 
 .srv-icon {
@@ -876,7 +923,7 @@ section { padding: 96px 5vw; position: relative; }
 }
 .achv-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,45,45,0.18);
+  box-shadow: 0 0 35px var(--red-glow), 0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,45,45,0.18);
 }
 .achv-bg-num {
   position: absolute; right: 16px; bottom: -8px;
@@ -1029,10 +1076,13 @@ footer {
   justify-content: space-between; flex-wrap: wrap; gap: 16px;
 }
 .ft-logo {
-  font-family: var(--font-display); font-size: 1.35rem;
-  letter-spacing: 0.1em; color: var(--white);
+  display: flex; align-items: center;
+  filter: drop-shadow(0 0 8px rgba(255,45,45,0.6));
+  animation: logo-glow-pulse 3s infinite ease-in-out;
 }
-.ft-logo .dot { color: var(--red); }
+.ft-logo img {
+  height: 38px; width: auto;
+}
 .ft-copy {
   font-family: var(--font-mono); font-size: 0.6rem;
   letter-spacing: 0.1em; color: var(--mid);
@@ -1052,7 +1102,7 @@ footer {
 #go-top {
   position: fixed; bottom: 28px; right: 28px; z-index: 50;
   width: 42px; height: 42px; background: var(--red);
-  border: none; cursor: none; display: flex;
+  border: none; cursor: pointer; display: flex;
   align-items: center; justify-content: center;
   opacity: 0; pointer-events: none;
   clip-path: polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);
@@ -1080,6 +1130,7 @@ footer {
 }
 @media (max-width: 560px) {
   section { padding: 68px 5vw; }
+  #contact { padding-bottom: 120px; }
   .srv-grid { grid-template-columns: 1fr; }
   .hero-name { font-size: clamp(3.8rem, 17vw, 5.5rem); }
   .counter-band { gap: 28px; }
@@ -1415,11 +1466,12 @@ footer {
 }
 
 /* Vcard hover border-color per category */
-.vcard[data-cat="anchoring"]:hover { border-color: rgba(255,45,45,0.4); }
-.vcard[data-cat="field"]:hover     { border-color: rgba(224,90,0,0.4); }
-.vcard[data-cat="interview"]:hover { border-color: rgba(139,45,255,0.4); }
-.vcard[data-cat="voiceover"]:hover { border-color: rgba(0,128,255,0.4); }
-.vcard[data-cat="digital"]:hover   { border-color: rgba(0,168,120,0.4); }
+.vcard:hover { box-shadow: 0 0 35px var(--red-glow), 0 20px 50px rgba(0,0,0,0.6); }
+.vcard[data-cat="anchoring"]:hover { border-color: rgba(255,45,45,0.6); box-shadow: 0 0 35px rgba(255,45,45,0.25), 0 20px 50px rgba(0,0,0,0.6); }
+.vcard[data-cat="field"]:hover     { border-color: rgba(224,90,0,0.6); box-shadow: 0 0 35px rgba(224,90,0,0.25), 0 20px 50px rgba(0,0,0,0.6); }
+.vcard[data-cat="interview"]:hover { border-color: rgba(139,45,255,0.6); box-shadow: 0 0 35px rgba(139,45,255,0.25), 0 20px 50px rgba(0,0,0,0.6); }
+.vcard[data-cat="voiceover"]:hover { border-color: rgba(0,128,255,0.6); box-shadow: 0 0 35px rgba(0,128,255,0.25), 0 20px 50px rgba(0,0,0,0.6); }
+.vcard[data-cat="digital"]:hover   { border-color: rgba(0,168,120,0.6); box-shadow: 0 0 35px rgba(0,168,120,0.25), 0 20px 50px rgba(0,0,0,0.6); }
 
 /* Filter dot indicators */
 .reel-filter-btn[data-filter="anchoring"].active { background:#FF2D2D; border-color:#FF2D2D; }
@@ -1468,7 +1520,9 @@ footer {
 
 <!-- ──────────────────── LOADER ──────────────────── -->
 <div id="loader">
-  <div class="loader-logo">D<span>·</span>SINGH</div>
+  <div class="loader-logo">
+    <img src="logo/divya-singh-logo-seal.png" alt="Divya Singh Seal">
+  </div>
   <div style="display:flex;flex-direction:column;align-items:center;gap:12px;width:220px;">
     <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
     <div class="loader-text">Entering the Newsroom…</div>
@@ -1481,7 +1535,9 @@ footer {
 
 <!-- ──────────────────── NAV ──────────────────── -->
 <nav id="navbar">
-  <a href="#hero" class="nav-logo">D<span class="dot">·</span>SINGH</a>
+  <a href="#hero" class="nav-logo">
+    <img src="logo/divya-singh-logo-seal-horizontal.png" alt="Divya Singh Logo">
+  </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#education">Education</a></li>
@@ -2074,7 +2130,9 @@ footer {
      FOOTER
 ══════════════════════════════════════ -->
 <footer>
-  <div class="ft-logo">D<span class="dot">·</span>SINGH</div>
+  <div class="ft-logo">
+    <img src="logo/divya-singh-logo-seal-horizontal.png" alt="Divya Singh Logo">
+  </div>
   <div class="ft-copy">© 2025 Divya Singh · Broadcast Journalist &amp; News Anchor</div>
   <nav class="ft-nav">
     <a href="#about">About</a>
@@ -2391,37 +2449,37 @@ async function submitForm(e) {
 const VIDEO_DATA = [
   // ── FEATURED / BEST WORK ───────────────────────────────────────
   { id:17, cat:"anchoring", channel:"NBC24", title:"Studio Interaction", desc:"Live interaction with field reporters and guests during the bulletin.", url:"", link:"https://www.facebook.com/share/v/1PGfxYf43n/", thumb:"https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800", dur:"3:55", date:"2025" },
-  { id:18, cat:"field", channel:"Chanakya News India", title:"Development Update", desc:"Field report on government scheme implementation in rural areas.", url:"https://www.youtube-nocookie.com/embed/B4Ft21K1Hy4", link:"https://youtu.be/B4Ft21K1Hy4", thumb:"", dur:"4:45", date:"2025" },
-  { id:16, cat:"field", channel:"NBC24", title:"People's Voice", desc:"Capturing the concerns and stories of the common man from the field.", url:"https://www.youtube-nocookie.com/embed/b3EDym-an_0", link:"https://youtu.be/b3EDym-an_0", thumb:"", dur:"4:10", date:"2025" },
+  { id:18, cat:"field", channel:"Chanakya News India", title:"Development Update", desc:"Field report on government scheme implementation in rural areas.", url:"https://www.youtube-nocookie.com/embed/B4Ft21K1Hy4", link:"https://www.youtube.com/watch?v=B4Ft21K1Hy4", thumb:"", dur:"4:45", date:"2025" },
+  { id:16, cat:"field", channel:"NBC24", title:"People's Voice", desc:"Capturing the concerns and stories of the common man from the field.", url:"https://www.youtube-nocookie.com/embed/b3EDym-an_0", link:"https://www.youtube.com/watch?v=b3EDym-an_0", thumb:"", dur:"4:10", date:"2025" },
   { id:1,  cat:"anchoring", channel:"Chanakya News India", title:"Prime-Time Bulletin Anchor", desc:"Live prime-time news bulletin anchoring covering breaking national stories.", url:"https://www.instagram.com/reel/DX6fkOkiclt/embed", link:"https://www.instagram.com/reel/DX6fkOkiclt", thumb:"https://i.ibb.co/8CLKVLc/divya.jpg", dur:"3:12", date:"2025" },
   { id:9,  cat:"field", channel:"NBC24", title:"Special Coverage - Field Report", desc:"In-depth field reporting on social issues and community-led initiatives.", url:"", link:"https://www.facebook.com/share/v/1Cpjjmnkny/", thumb:"https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&q=80&w=800", dur:"4:30", date:"2025" },
-  { id:4,  cat:"anchoring", channel:"Chanakya News India", title:"BREAKING: देश जलाने की साजिश नाकाम", desc:"Breaking news coverage of a foiled conspiracy, reported with urgency and factual depth.", url:"https://www.youtube.com/embed/3aLgZuesxNc", link:"https://youtu.be/3aLgZuesxNc", thumb:"", dur:"6:20", date:"2025" },
+  { id:4,  cat:"anchoring", channel:"Chanakya News India", title:"BREAKING: देश जलाने की साजिश नाकाम", desc:"Breaking news coverage of a foiled conspiracy, reported with urgency and factual depth.", url:"https://www.youtube-nocookie.com/embed/3aLgZuesxNc", link:"https://www.youtube.com/watch?v=3aLgZuesxNc", thumb:"", dur:"6:20", date:"2025" },
 
   // ── ANCHORING & BULLETINS ──────────────────────────────────────
-  { id:5,  cat:"anchoring", channel:"Chanakya News India", title:"Prime-Time Analysis", desc:"Live news analysis covering significant regional developments and policy changes.", url:"https://www.youtube-nocookie.com/embed/ztSYjxJDRjY", link:"https://youtu.be/ztSYjxJDRjY", thumb:"", dur:"4:15", date:"2025" },
-  { id:7,  cat:"anchoring", channel:"NBC24", title:"Live Bulletin - Morning Edition", desc:"Anchoring the morning news cycle with live updates from the NBC24 studio.", url:"https://www.youtube-nocookie.com/embed/MNYi5L3MQQo", link:"https://youtu.be/MNYi5L3MQQo", thumb:"", dur:"5:10", date:"2025" },
-  { id:8,  cat:"anchoring", channel:"Chanakya News India", title:"Breaking News Special", desc:"Handling live breaking news events with editorial precision and real-time updates.", url:"https://www.youtube-nocookie.com/embed/WLWm54JSqoM", link:"https://youtu.be/WLWm54JSqoM", thumb:"", dur:"6:45", date:"2025" },
+  { id:5,  cat:"anchoring", channel:"Chanakya News India", title:"Prime-Time Analysis", desc:"Live news analysis covering significant regional developments and policy changes.", url:"https://www.youtube-nocookie.com/embed/ztSYjxJDRjY", link:"https://www.youtube.com/watch?v=ztSYjxJDRjY", thumb:"", dur:"4:15", date:"2025" },
+  { id:7,  cat:"anchoring", channel:"NBC24", title:"Live Bulletin - Morning Edition", desc:"Anchoring the morning news cycle with live updates from the NBC24 studio.", url:"https://www.youtube-nocookie.com/embed/MNYi5L3MQQo", link:"https://www.youtube.com/watch?v=MNYi5L3MQQo", thumb:"", dur:"5:10", date:"2025" },
+  { id:8,  cat:"anchoring", channel:"Chanakya News India", title:"Breaking News Special", desc:"Handling live breaking news events with editorial precision and real-time updates.", url:"https://www.youtube-nocookie.com/embed/WLWm54JSqoM", link:"https://www.youtube.com/watch?v=WLWm54JSqoM", thumb:"", dur:"6:45", date:"2025" },
   { id:10, cat:"anchoring", channel:"NBC24", title:"Evening News Bulletin", desc:"Comprehensive evening news coverage including political and economic highlights.", url:"", link:"https://www.facebook.com/nbc24bihar/videos/2165856577159663/", thumb:"https://images.unsplash.com/photo-1557425955-df376b5903c8?auto=format&fit=crop&q=80&w=800", dur:"8:20", date:"2025" },
-  { id:13, cat:"anchoring", channel:"Chanakya News India", title:"Political Pulse", desc:"Studio discussion and analysis of current political trends.", url:"https://www.youtube-nocookie.com/embed/yh8vYrxsvxg", link:"https://youtu.be/yh8vYrxsvxg", thumb:"", dur:"6:30", date:"2025" },
+  { id:13, cat:"anchoring", channel:"Chanakya News India", title:"Political Pulse", desc:"Studio discussion and analysis of current political trends.", url:"https://www.youtube-nocookie.com/embed/yh8vYrxsvxg", link:"https://www.youtube.com/watch?v=yh8vYrxsvxg", thumb:"", dur:"6:30", date:"2025" },
   { id:58, cat:"anchoring", channel:"Instagram", title:"On-Air Digital Segment", desc:"Presenting key news highlights in a fast-paced digital format.", url:"https://www.instagram.com/reel/DTcS-SDga8C/embed", link:"https://www.instagram.com/reel/DTcS-SDga8C/", thumb:"https://images.unsplash.com/photo-1557425955-df376b5903c8?auto=format&fit=crop&q=80&w=800", dur:"1:10", date:"2025" },
   { id:21, cat:"anchoring", channel:"NBC24", title:"Daily News Summary", desc:"Wrapping up the day's biggest stories with professional narration.", url:"", link:"https://www.facebook.com/share/v/1KRotjzAeF/", thumb:"https://images.unsplash.com/photo-1476242906366-d8eb64c2f661?auto=format&fit=crop&q=80&w=800", dur:"4:30", date:"2025" },
 
   // ── FIELD REPORTING ────────────────────────────────────────────
-  { id:2,  cat:"field", channel:"Chanakya News India", title:"चिरसी में अंधेरे का राज...", desc:"A ground-level investigation into the persistent issues and dark realities of Chirsi village.", url:"https://www.youtube.com/embed/Fm6jZWjYt8s", link:"https://youtu.be/Fm6jZWjYt8s", thumb:"", dur:"4:05", date:"2025" },
-  { id:3,  cat:"field", channel:"Chanakya News India", title:"40 सालों से बह रही सरकारी नाकामी की नाली...", desc:"Exposing 40 years of governmental neglect regarding local drainage and infrastructure.", url:"https://www.youtube.com/embed/JduFKIBUiks", link:"https://youtu.be/JduFKIBUiks", thumb:"", dur:"5:47", date:"2025" },
-  { id:6,  cat:"field", channel:"Chanakya News India", title:"Ground Reality Check", desc:"Investigative field report on local infrastructure and public grievances.", url:"https://www.youtube-nocookie.com/embed/DxVZddbfDjA", link:"https://youtu.be/DxVZddbfDjA", thumb:"", dur:"3:50", date:"2025" },
+  { id:2,  cat:"field", channel:"Chanakya News India", title:"चिरसी में अंधेरे का राज...", desc:"A ground-level investigation into the persistent issues and dark realities of Chirsi village.", url:"https://www.youtube-nocookie.com/embed/Fm6jZWjYt8s", link:"https://www.youtube.com/watch?v=Fm6jZWjYt8s", thumb:"", dur:"4:05", date:"2025" },
+  { id:3,  cat:"field", channel:"Chanakya News India", title:"40 सालों से बह रही सरकारी नाकामी की नाली...", desc:"Exposing 40 years of governmental neglect regarding local drainage and infrastructure.", url:"https://www.youtube-nocookie.com/embed/JduFKIBUiks", link:"https://www.youtube.com/watch?v=JduFKIBUiks", thumb:"", dur:"5:47", date:"2025" },
+  { id:6,  cat:"field", channel:"Chanakya News India", title:"Ground Reality Check", desc:"Investigative field report on local infrastructure and public grievances.", url:"https://www.youtube-nocookie.com/embed/DxVZddbfDjA", link:"https://www.youtube.com/watch?v=DxVZddbfDjA", thumb:"", dur:"3:50", date:"2025" },
   { id:11, cat:"field", channel:"Chanakya News India", title:"Community Watch", desc:"Reporting on local events and their impact on the surrounding community.", url:"", link:"https://www.facebook.com/share/v/1H4W8EhX6z/", thumb:"https://images.unsplash.com/photo-1585829365234-781fcd50c40b?auto=format&fit=crop&q=80&w=800", dur:"3:25", date:"2025" },
-  { id:14, cat:"field", channel:"NBC24", title:"Urban Infrastructure Report", desc:"On-ground investigation of urban development projects and public safety.", url:"https://www.youtube-nocookie.com/embed/AExVoZPAHaU", link:"https://youtu.be/AExVoZPAHaU", thumb:"", dur:"4:50", date:"2025" },
-  { id:15, cat:"field", channel:"Chanakya News India", title:"Cultural Heritage Feature", desc:"Exploring and reporting on local cultural landmarks and events.", url:"https://www.youtube-nocookie.com/embed/1ZjMo6z6bcQ", link:"https://youtu.be/1ZjMo6z6bcQ", thumb:"", dur:"5:40", date:"2025" },
+  { id:14, cat:"field", channel:"NBC24", title:"Urban Infrastructure Report", desc:"On-ground investigation of urban development projects and public safety.", url:"https://www.youtube-nocookie.com/embed/AExVoZPAHaU", link:"https://www.youtube.com/watch?v=AExVoZPAHaU", thumb:"", dur:"4:50", date:"2025" },
+  { id:15, cat:"field", channel:"Chanakya News India", title:"Cultural Heritage Feature", desc:"Exploring and reporting on local cultural landmarks and events.", url:"https://www.youtube-nocookie.com/embed/1ZjMo6z6bcQ", link:"https://www.youtube.com/watch?v=1ZjMo6z6bcQ", thumb:"", dur:"5:40", date:"2025" },
   { id:19, cat:"field", channel:"NBC24", title:"On-Ground Reporting", desc:"Direct field reporting on breaking news and social events.", url:"", link:"https://www.facebook.com/share/1Ba8oMDdvb/", thumb:"https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=80&w=800", dur:"2:50", date:"2025" },
-  { id:56, cat:"field", channel:"Instagram", title:"On-Ground Digital Report", desc:"Mobile-first reporting from the field, bringing news directly to social audiences.", url:"https://www.instagram.com/reel/DYRglBdiW3B/embed", link:"https://www.instagram.com/reel/DYRglBdiW3B/", thumb:"https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=80&w=800", dur:"1:15", date:"2025" },
-  { id:51, cat:"field", channel:"Chanakya News India", title:"वृंदावन गया था परिवार पीछे से घर को बनाया निशाना...", desc:"Investigative report on a residential robbery occurring while the family was away.", url:"https://www.youtube-nocookie.com/embed/buvuuR-etv8", link:"https://youtu.be/buvuuR-etv8", thumb:"", dur:"3:45", date:"2025" },
-  { id:52, cat:"field", channel:"Chanakya News India", title:"रोहित हुड़ा ने अरुण हुड़ा पर बरसाई गोलियां..", desc:"Breaking crime report covering a shooting incident and immediate local impact.", url:"https://www.youtube-nocookie.com/embed/2LnJWUPJPBU", link:"https://youtu.be/2LnJWUPJPBU", thumb:"", dur:"2:50", date:"2025" },
-  { id:53, cat:"field", channel:"Chanakya News India", title:"रात होते ही शुरू हो जाता है आतंक...", desc:"Ground investigation into nocturnal disturbances and public safety concerns in the region.", url:"https://www.youtube-nocookie.com/embed/MgqAnMBXcJA", link:"https://youtu.be/MgqAnMBXcJA", thumb:"", dur:"4:15", date:"2025" },
+  { id:56, cat:"field", channel:"Instagram", title:"On-Ground Digital Report", desc:"Mobile-first reporting from the field, bringing news directly to social audiences.", url:"https://www.instagram.com/reel/DYRglBdiW3B/embed", link:"https://www.instagram.com/reel/DYRglBdiW3B/", thumb:"", dur:"1:15", date:"2025" },
+  { id:51, cat:"field", channel:"Chanakya News India", title:"वृंदावन गया था परिवार पीछे से घर को बनाया निशाना...", desc:"Investigative report on a residential robbery occurring while the family was away.", url:"https://www.youtube-nocookie.com/embed/buvuuR-etv8", link:"https://www.youtube.com/watch?v=buvuuR-etv8", thumb:"", dur:"3:45", date:"2025" },
+  { id:52, cat:"field", channel:"Chanakya News India", title:"रोहित हुड़ा ने अरुण हुड़ा पर बरसाई गोलियां..", desc:"Breaking crime report covering a shooting incident and immediate local impact.", url:"https://www.youtube-nocookie.com/embed/2LnJWUPJPBU", link:"https://www.youtube.com/watch?v=2LnJWUPJPBU", thumb:"", dur:"2:50", date:"2025" },
+  { id:53, cat:"field", channel:"Chanakya News India", title:"रात होते ही शुरू हो जाता है आतंक...", desc:"Ground investigation into nocturnal disturbances and public safety concerns in the region.", url:"https://www.youtube-nocookie.com/embed/MgqAnMBXcJA", link:"https://www.youtube.com/watch?v=MgqAnMBXcJA", thumb:"", dur:"4:15", date:"2025" },
 
   // ── INTERVIEWS ─────────────────────────────────────────────────
   { id:12, cat:"interview", channel:"NBC24", title:"Expert Interaction", desc:"Interviewing industry experts on critical public interest topics.", url:"", link:"https://www.facebook.com/share/v/14e1sp3UrHo/", thumb:"https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800", dur:"7:15", date:"2025" },
-  { id:20, cat:"interview", channel:"Chanakya News India", title:"In-Depth Interview", desc:"Detailed conversation with prominent figures on current events.", url:"https://www.youtube-nocookie.com/embed/BI4-f6S2yss", link:"https://youtu.be/BI4-f6S2yss", thumb:"", dur:"9:15", date:"2025" },
+  { id:20, cat:"interview", channel:"Chanakya News India", title:"In-Depth Interview", desc:"Detailed conversation with prominent figures on current events.", url:"https://www.youtube-nocookie.com/embed/BI4-f6S2yss", link:"https://www.youtube.com/watch?v=BI4-f6S2yss", thumb:"", dur:"9:15", date:"2025" },
   { id:22, cat:"interview", channel:"Chanakya News India", title:"Citizen Voices — City Issues", desc:"Vox pop interview series capturing public opinion on civic infrastructure.", url:"", link:"", thumb:"", dur:"4:00", date:"2025" },
   { id:23, cat:"interview", channel:"NBC24", title:"NGO Leader Interview", desc:"Interview with social welfare organisation leader on women's health campaign.", url:"", link:"", thumb:"", dur:"6:45", date:"2025" },
   { id:24, cat:"interview", channel:"Chanakya News India", title:"Phono Segment — Expert Panel", desc:"Live phone-in interaction with policy expert during news bulletin.", url:"", link:"", thumb:"", dur:"5:20", date:"2025" },
@@ -2722,7 +2780,8 @@ function openVideoModal(v) {
     if (embedUrl.includes('youtube.com')) {
       embedUrl = embedUrl.replace('youtube.com', 'youtube-nocookie.com');
     }
-    wrap.innerHTML = `<iframe src="${embedUrl}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+
+    wrap.innerHTML = `<iframe src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   } else if (v.link) {
     // Show professional placeholder with thumbnail if embed is blocked
     const thumb = v.thumb || "";
@@ -2777,7 +2836,8 @@ function modalNavigate(dir) {
     if (embedUrl.includes('youtube.com')) {
       embedUrl = embedUrl.replace('youtube.com', 'youtube-nocookie.com');
     }
-    wrap.innerHTML = `<iframe src="${embedUrl}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+
+    wrap.innerHTML = `<iframe src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   } else if (v.link) {
     const thumb = v.thumb || "";
     wrap.innerHTML = `
