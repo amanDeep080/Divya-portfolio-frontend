@@ -103,20 +103,28 @@ body {
 /* ════════════════════════════════════════
    CURSOR
 ════════════════════════════════════════ */
-#cursor {
-  position: fixed; width: 8px; height: 8px;
-  background: var(--red); border-radius: 50%;
-  pointer-events: none; z-index: 9998;
+#cursor, #cursor-ring {
+  position: fixed; pointer-events: none; z-index: 9998;
   transform: translate(-50%,-50%);
   transition: width .15s, height .15s, opacity .2s;
+}
+#cursor {
+  width: 8px; height: 8px; background: var(--red); border-radius: 50%;
   mix-blend-mode: screen;
 }
 #cursor-ring {
-  position: fixed; width: 32px; height: 32px;
+  width: 32px; height: 32px;
   border: 1px solid rgba(255,45,45,0.45);
-  border-radius: 50%; pointer-events: none; z-index: 9997;
-  transform: translate(-50%,-50%);
+  border-radius: 50%; z-index: 9997;
 }
+
+/* Hide custom cursor on touch devices for better efficiency */
+@media (hover: none) and (pointer: coarse) {
+  #cursor, #cursor-ring { display: none !important; }
+  body { cursor: auto !important; }
+  a, button, .vcard, .exp-card, .srv-card { cursor: pointer !important; }
+}
+
 body:has(a:hover) #cursor,
 body:has(button:hover) #cursor { width: 16px; height: 16px; }
 
@@ -1412,8 +1420,17 @@ footer {
 .reel-filter-btn[data-filter="voiceover"].active { background:#0080FF; border-color:#0080FF; }
 .reel-filter-btn[data-filter="digital"].active   { background:#00A878; border-color:#00A878; }
 
-/* Search box */
-.reel-search-wrap {
+/* Social icon styling */
+.soc-link {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; background: var(--charcoal);
+  border: 1px solid var(--glass-border); transition: all .2s;
+  text-decoration: none;
+}
+.soc-link:hover {
+  border-color: var(--red); background: var(--red-subtle);
+  box-shadow: 0 0 20px var(--red-glow);
+}
   position: relative; margin-bottom: 1.5rem;
   max-width: 380px;
 }
@@ -2001,21 +2018,13 @@ footer {
 
       <!-- Social links row -->
       <div style="display:flex;gap:12px;margin-top:0.5rem;flex-wrap:wrap;">
-        <a href="mailto:divyasingh08262@gmail.com" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;background:var(--charcoal);border:1px solid var(--glass-border);transition:border-color .2s,background .2s,box-shadow .2s;text-decoration:none;"
-           onmouseenter="this.style.borderColor='var(--red)';this.style.background='var(--red-subtle)';this.style.boxShadow='0 0 20px var(--red-glow)'"
-           onmouseleave="this.style.borderColor='var(--glass-border)';this.style.background='var(--charcoal)';this.style.boxShadow='none'">
+        <a href="mailto:divyasingh08262@gmail.com" class="soc-link">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </a>
-        <a href="https://www.linkedin.com/in/divyaa-singh-064445369/" target="_blank" rel="noopener noreferrer"
-           style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;background:var(--charcoal);border:1px solid var(--glass-border);transition:border-color .2s,background .2s,box-shadow .2s;text-decoration:none;"
-           onmouseenter="this.style.borderColor='var(--red)';this.style.background='var(--red-subtle)';this.style.boxShadow='0 0 20px var(--red-glow)'"
-           onmouseleave="this.style.borderColor='var(--glass-border)';this.style.background='var(--charcoal)';this.style.boxShadow='none'">
+        <a href="https://www.linkedin.com/in/divyaa-singh-064445369/" target="_blank" rel="noopener noreferrer" class="soc-link">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
-        <a href="https://www.instagram.com/diiiivyaaaa___0720?stkn=Y2huaWljb241djFz" target="_blank" rel="noopener noreferrer"
-           style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;background:var(--charcoal);border:1px solid var(--glass-border);transition:border-color .2s,background .2s,box-shadow .2s;text-decoration:none;"
-           onmouseenter="this.style.borderColor='var(--red)';this.style.background='var(--red-subtle)';this.style.boxShadow='0 0 20px var(--red-glow)'"
-           onmouseleave="this.style.borderColor='var(--glass-border)';this.style.background='var(--charcoal)';this.style.boxShadow='none'">
+        <a href="https://www.instagram.com/diiiivyaaaa___0720?stkn=Y2huaWljb241djFz" target="_blank" rel="noopener noreferrer" class="soc-link">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         </a>
       </div>
